@@ -14,13 +14,13 @@ export default function Home() {
     <>
       <HomeHero />
       <JourneyIntro />
+      <ReviewsQuote />
       <SignatureCollection />
-      <FadedStatement lines={[['An Island'], ['Of', 'Unseen Treasures']]} />
+      <FadedStatement section="home.statement" />
       <RetreatCollection />
       <CraftedJourneys />
       <FinestIsland />
       <ExperienceCarousel />
-      <ReviewsQuote />
       <Journal />
     </>
   )

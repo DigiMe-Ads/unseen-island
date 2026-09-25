@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import { useSection } from '../../content/ContentProvider.jsx'
 
 // Oversized pale serif statement that darkens slightly as it scrolls through the viewport.
-export default function FadedStatement({ lines, className = '' }) {
+export default function FadedStatement({ section, className = '' }) {
+  const lines = useSection(section).lines.map((l) => [l.roman, l.italic])
   const ref = useRef(null)
   const [progress, setProgress] = useState(0)
 

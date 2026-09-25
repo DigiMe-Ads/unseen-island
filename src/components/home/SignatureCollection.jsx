@@ -1,19 +1,19 @@
-import { SIGNATURE } from '../../data/content.js'
+import { useSection } from '../../content/ContentProvider.jsx'
 import Heading from '../common/Heading.jsx'
 import Reveal from '../common/Reveal.jsx'
 import CaptionCard from '../common/CaptionCard.jsx'
 
 // Staggered three-card layout: intro text + card on the first row, two offset cards below.
 export default function SignatureCollection() {
-  const [first, second, third] = SIGNATURE
+  const c = useSection('home.signature')
+  const [first, second, third] = c.items
   return (
     <section id="experiences" className="mx-auto max-w-7xl scroll-mt-20 px-4 pb-24 sm:px-8 lg:pb-32">
       <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
         <div className="lg:pt-16 lg:pl-10">
-          <Heading label="Signature Journeys" title="The Unseen" accent="Collection" />
+          <Heading label={c.label} title={c.title} accent={c.accent} />
           <Reveal delay={150} as="p" className="mt-6 max-w-md text-[15px] leading-relaxed text-muted">
-            From the heritage-rich north to the surf breaks of the east and the wild heart of Yala, each journey is crafted around the
-            places that make Sri Lanka unforgettable — and the people who call them home.
+            {c.text}
           </Reveal>
         </div>
         <Reveal from="right">

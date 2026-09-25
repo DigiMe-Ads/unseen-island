@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react'
-import { IMAGES } from '../../data/images.js'
+import { useSection } from '../../content/ContentProvider.jsx'
 import { Flourish } from '../common/Icons.jsx'
-
-const SLIDES = [IMAGES.villaCoast, IMAGES.sunsetPalms, IMAGES.surfers, IMAGES.rainforestPool]
 
 // Full-screen crossfading hero with a centred two-line serif title.
 export default function HomeHero() {
+  const c = useSection('home.hero')
+  const SLIDES = c.slides
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
+    if (SLIDES.length < 2) return
     const id = setTimeout(() => setIndex((i) => (i + 1) % SLIDES.length), 6500)
     return () => clearTimeout(id)
-  }, [index])
+  }, [index, SLIDES.length])
 
   return (
     <section className="relative h-[100svh] min-h-[560px] overflow-hidden bg-forest">
       {SLIDES.map((img, i) => (
-        <div key={img.src} className={`absolute inset-0 transition-opacity duration-[1800ms] ${i === index ? 'opacity-100' : 'opacity-0'}`}>
+        <div key={i} className={`absolute inset-0 transition-opacity duration-[1800ms] ${i === index ? 'opacity-100' : 'opacity-0'}`}>
           <img
             src={img.src}
             alt={img.alt}
@@ -30,8 +31,8 @@ export default function HomeHero() {
 
       <div className="relative flex h-full flex-col items-center justify-center px-4 text-center text-cream">
         <h1 className="font-serif text-5xl leading-[1.05] sm:text-7xl lg:text-[88px]">
-          <span className="animate-rise block" style={{ animationDelay: '200ms' }}>One Unseen Island</span>
-          <em className="animate-rise block" style={{ animationDelay: '450ms' }}>Countless Extraordinary Journeys</em>
+          <span className="animate-rise block" style={{ animationDelay: '200ms' }}>{c.title}</span>
+          <em className="animate-rise block" style={{ animationDelay: '450ms' }}>{c.accent}</em>
         </h1>
         <Flourish className="animate-draw mt-8 w-40 text-cream/90" style={{ animationDelay: '900ms' }} />
       </div>
@@ -39,7 +40,7 @@ export default function HomeHero() {
       <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-3">
         {SLIDES.map((img, i) => (
           <button
-            key={img.src}
+            key={i}
             onClick={() => setIndex(i)}
             aria-label={`Show slide ${i + 1}`}
             className="group h-6 py-2.5"

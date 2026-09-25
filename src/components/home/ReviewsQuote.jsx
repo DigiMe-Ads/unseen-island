@@ -1,26 +1,30 @@
 import { useEffect, useState } from 'react'
-import { REVIEWS } from '../../data/content.js'
+import { useSection } from '../../content/ContentProvider.jsx'
 import Reveal from '../common/Reveal.jsx'
 import TextLink from '../common/TextLink.jsx'
 import { QuoteIcon, StarIcon } from '../common/Icons.jsx'
 
 // Press-style quote rotator for guest reviews.
 export default function ReviewsQuote() {
+  const c = useSection('home.reviews')
+  const REVIEWS = c.items
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
+    if (REVIEWS.length < 2) return
     const id = setTimeout(() => setIndex((i) => (i + 1) % REVIEWS.length), 7000)
     return () => clearTimeout(id)
-  }, [index])
+  }, [index, REVIEWS.length])
 
   const review = REVIEWS[index]
+  if (!review) return null
   return (
     <section id="reviews" className="scroll-mt-20 bg-sand px-4 py-24 text-center sm:px-8 lg:py-32">
       <Reveal>
-        <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-muted">What Our Guests Say</p>
+        <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-muted">{c.label}</p>
         <div className="mt-3 flex items-center justify-center gap-1 text-gold">
           {Array.from({ length: 5 }, (_, i) => <StarIcon key={i} className="h-4 w-4" />)}
-          <span className="ml-2 text-xs tracking-wide text-muted">35 Google reviews</span>
+          <span className="ml-2 text-xs tracking-wide text-muted">{c.rating}</span>
         </div>
       </Reveal>
 
@@ -39,15 +43,17 @@ export default function ReviewsQuote() {
 
       <div className="mt-8 flex justify-center gap-3">
         {REVIEWS.map((r, i) => (
-          <button key={r.name} onClick={() => setIndex(i)} aria-label={`Show review by ${r.name}`} className="group h-6 py-2.5">
+          <button key={i} onClick={() => setIndex(i)} aria-label={`Show review by ${r.name}`} className="group h-6 py-2.5">
             <span className={`block h-px transition-all duration-700 ${i === index ? 'w-12 bg-forest' : 'w-6 bg-faded group-hover:bg-muted'}`} />
           </button>
         ))}
       </div>
 
-      <Reveal delay={250} className="mt-8">
-        <TextLink href="https://www.google.com/maps/search/The+Unseen+Island">Read All Reviews</TextLink>
-      </Reveal>
+      {c.link && c.linkUrl && (
+        <Reveal delay={250} className="mt-8">
+          <TextLink href={c.linkUrl}>{c.link}</TextLink>
+        </Reveal>
+      )}
     </section>
   )
 }

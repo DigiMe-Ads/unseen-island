@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-xs: 22.5rem;
   --font-serif: "Instrument Serif", Georgia, serif;
   --font-sans: "Work Sans", system-ui, sans-serif;
   --font-logo: "Amatic SC", cursive;

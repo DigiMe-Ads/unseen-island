@@ -1,32 +1,37 @@
 import { Link } from 'react-router-dom'
-import { NAV_LINKS, MENU_SECONDARY, SERVICES, CONTACT } from '../../data/site.js'
+import { NAV_LINKS, MENU_SECONDARY } from '../../data/site.js'
+import { telHref, waHref, useSection } from '../../content/ContentProvider.jsx'
 import Logo from './Logo.jsx'
-import Newsletter from './Newsletter.jsx'
 import SocialIcons from './SocialIcons.jsx'
-import { ArrowIcon } from '../common/Icons.jsx'
+import { ArrowIcon, WhatsAppIcon } from '../common/Icons.jsx'
 
 const small = 'text-sm text-cream/75 transition-colors hover:text-cream'
 
 export default function Footer() {
+  const c = useSection('site.footer')
+  const contact = useSection('site.contact')
+  const { services } = useSection('site.services')
   return (
-    <footer className="bg-forest px-4 pt-16 pb-10 text-cream sm:px-8 lg:px-12">
+    <footer className="bg-forest px-4 pt-20 pb-10 text-cream sm:px-8 lg:px-12">
       <div className="mx-auto max-w-7xl">
-        <Newsletter />
-
-        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-12 pb-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div className="space-y-5">
             <Logo light size="lg" />
-            <p className="max-w-xs text-sm leading-relaxed text-cream/70">
-              Bespoke private and group tours and luxury travel management, creating unforgettable memories across Sri Lanka.
-            </p>
+            <p className="max-w-xs text-sm leading-relaxed text-cream/70">{c.blurb}</p>
             <div className="space-y-1 text-sm text-cream/75">
-              <a href={`mailto:${CONTACT.email}`} className="block hover:text-cream">{CONTACT.email}</a>
-              <a href={CONTACT.phoneHref} className="block hover:text-cream">{CONTACT.phone}</a>
-              <p className="pt-2 text-cream/60">{CONTACT.office.join(', ')}</p>
+              <a href={`mailto:${contact.email}`} className="block wrap-break-word hover:text-cream">{contact.email}</a>
+              <a href={telHref(contact.phone)} className="block hover:text-cream">{contact.phone}</a>
+              <p className="pt-2 text-cream/60">{contact.office.join(', ')}</p>
             </div>
-            <Link to="/contact" className="inline-block border border-cream/60 px-6 py-3 font-serif text-sm uppercase tracking-wide transition-all duration-300 hover:bg-cream hover:text-forest">
-              Enquire Now
-            </Link>
+            <a
+              href={waHref(contact.whatsapp, contact.whatsappMessage)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 border border-cream/60 px-6 py-3 font-serif text-sm uppercase tracking-wide transition-all duration-300 hover:border-[#25D366] hover:bg-[#25D366] hover:text-forest"
+            >
+              <WhatsAppIcon className="h-4 w-4" />
+              {c.cta}
+            </a>
             <SocialIcons light />
           </div>
 
@@ -41,7 +46,7 @@ export default function Footer() {
           <div>
             <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.25em] text-cream/60">What We Do</p>
             <ul className="space-y-3">
-              {SERVICES.map((s) => (
+              {services.map((s) => (
                 <li key={s}><Link to="/contact" className={small}>{s}</Link></li>
               ))}
             </ul>

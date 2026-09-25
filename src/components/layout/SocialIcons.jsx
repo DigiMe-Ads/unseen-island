@@ -1,11 +1,12 @@
-import { SOCIAL } from '../../data/site.js'
+import { useSection } from '../../content/ContentProvider.jsx'
 import { InstagramIcon, FacebookIcon } from '../common/Icons.jsx'
 
 export default function SocialIcons({ light = false }) {
+  const social = useSection('site.social')
   const links = [
-    { href: SOCIAL.instagram, label: 'Instagram', Icon: InstagramIcon },
-    { href: SOCIAL.facebook, label: 'Facebook', Icon: FacebookIcon },
-  ]
+    { href: social.instagram, label: 'Instagram', Icon: InstagramIcon },
+    { href: social.facebook, label: 'Facebook', Icon: FacebookIcon },
+  ].filter((l) => l.href)
   return (
     <div className="flex items-center gap-4">
       {links.map(({ href, label, Icon }) => (

@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { NAV_LINKS, MENU_SECONDARY, CONTACT } from '../../data/site.js'
-import { IMAGES } from '../../data/images.js'
+import { NAV_LINKS, MENU_SECONDARY } from '../../data/site.js'
+import { telHref, useSection } from '../../content/ContentProvider.jsx'
 import Logo from './Logo.jsx'
 import SocialIcons from './SocialIcons.jsx'
 import { ChevronIcon, CloseIcon } from '../common/Icons.jsx'
 
-// Second photo shown beside each nav link's own image.
-const COMPANIONS = [IMAGES.cocktails, IMAGES.pavilion, IMAGES.buffaloMud, IMAGES.goldenBeach, IMAGES.jungleVilla]
-
 // Full-screen menu: large serif links on the left, a pair of photos on the right that follow the hovered link.
 export default function MenuOverlay({ open, onClose }) {
   const [active, setActive] = useState(0)
+  const { photos } = useSection('site.menu')
+  const contact = useSection('site.contact')
 
   useEffect(() => {
     if (!open) return
@@ -24,7 +23,7 @@ export default function MenuOverlay({ open, onClose }) {
     }
   }, [open, onClose])
 
-  const pair = [NAV_LINKS[active].image, COMPANIONS[active]]
+  const pair = [photos[active]?.image, photos[active]?.companion].filter(Boolean)
 
   return (
     <div
@@ -33,15 +32,16 @@ export default function MenuOverlay({ open, onClose }) {
       }`}
       aria-hidden={!open}
     >
-      <div className="grid grid-cols-[1fr_auto_1fr] items-center px-4 py-4 sm:px-8">
-        <button onClick={onClose} className="justify-self-start text-forest transition-transform duration-300 hover:rotate-90" aria-label="Close menu">
-          <CloseIcon className="h-6 w-6" />
-        </button>
+      <div className="flex items-center justify-between gap-6 px-4 py-5 sm:px-8">
         <Logo onClick={onClose} />
-        <Link to="/contact" onClick={onClose} className="justify-self-end border border-forest bg-forest px-3 py-2.5 font-serif text-xs uppercase tracking-wide text-cream transition-colors hover:bg-transparent hover:text-forest sm:px-6 sm:text-sm">
-          <span className="hidden sm:inline">Plan Your Journey</span>
-          <span className="sm:hidden">Enquire</span>
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link to="/contact" onClick={onClose} className="hidden whitespace-nowrap border border-forest bg-forest px-6 py-2.5 font-serif text-sm uppercase tracking-wide text-cream transition-colors hover:bg-transparent hover:text-forest sm:inline-block">
+            Plan Your Journey
+          </Link>
+          <button onClick={onClose} className="text-forest transition-transform duration-300 hover:rotate-90" aria-label="Close menu">
+            <CloseIcon className="h-7 w-7" />
+          </button>
+        </div>
       </div>
 
       <div className="grid min-h-0 flex-1 gap-10 overflow-y-auto px-6 pt-6 pb-10 sm:px-16 lg:grid-cols-[1fr_1.4fr] lg:pt-10">
@@ -78,8 +78,8 @@ export default function MenuOverlay({ open, onClose }) {
           </ul>
 
           <div className="mt-10 space-y-1 text-sm text-muted">
-            <a href={`mailto:${CONTACT.email}`} className="block transition-colors hover:text-forest">{CONTACT.email}</a>
-            <a href={CONTACT.phoneHref} className="block transition-colors hover:text-forest">{CONTACT.phone}</a>
+            <a href={`mailto:${contact.email}`} className="block wrap-break-word transition-colors hover:text-forest">{contact.email}</a>
+            <a href={telHref(contact.phone)} className="block transition-colors hover:text-forest">{contact.phone}</a>
             <div className="pt-4"><SocialIcons /></div>
           </div>
         </nav>

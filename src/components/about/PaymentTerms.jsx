@@ -1,34 +1,21 @@
 import { useState } from 'react'
+import { useSection } from '../../content/ContentProvider.jsx'
 import Heading from '../common/Heading.jsx'
 import Reveal from '../common/Reveal.jsx'
 
-const TERMS = [
-  {
-    q: 'Accepted Payment Methods',
-    a: 'We accept bank transfers, major credit and debit cards, and secure online payment links. Details for each method are provided with your booking confirmation.',
-  },
-  {
-    q: 'Currency',
-    a: 'All quotations are issued in US Dollars (USD) unless otherwise agreed. Payments in other currencies are converted at the prevailing exchange rate on the day of payment, and any bank charges are borne by the client.',
-  },
-  {
-    q: 'Confirmation of Booking',
-    a: 'Your booking is confirmed once we receive the agreed deposit and a signed acceptance of these terms. The remaining balance is payable before the start of your tour, as stated on your invoice.',
-  },
-]
-
 // Minimal hairline accordion.
 export default function PaymentTerms() {
+  const c = useSection('about.terms')
   const [open, setOpen] = useState(null)
 
   return (
     <section id="payment-terms" className="mx-auto grid max-w-7xl scroll-mt-24 gap-12 px-4 py-24 sm:px-8 lg:grid-cols-[1fr_1.6fr] lg:py-32">
-      <Heading label="Good To Know" title="Payments," accent="Terms & Conditions" size="md" />
+      <Heading label={c.label} title={c.title} accent={c.accent} size="md" />
       <div className="border-t border-line">
-        {TERMS.map((t, i) => {
+        {c.items.map((t, i) => {
           const isOpen = open === i
           return (
-            <Reveal key={t.q} delay={i * 100} className="border-b border-line">
+            <Reveal key={i}delay={i * 100} className="border-b border-line">
               <button
                 onClick={() => setOpen(isOpen ? null : i)}
                 aria-expanded={isOpen}
