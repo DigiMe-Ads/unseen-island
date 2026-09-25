@@ -30,6 +30,10 @@ export function ContentProvider({ children }) {
   const [ready, setReady] = useState(cached !== null)
 
   useEffect(() => {
+    if (!db) {
+      setReady(true)
+      return
+    }
     let active = true
     const timer = setTimeout(() => setReady(true), FIRST_LOAD_TIMEOUT)
     db.from('site_content')

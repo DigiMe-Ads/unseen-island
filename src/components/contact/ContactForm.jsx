@@ -69,7 +69,9 @@ export default function ContactForm() {
     }
 
     setStatus('sending')
-    const { error } = await db.from('inquiries').insert({ ...enquiry, channel: viaWhatsApp ? 'whatsapp' : 'form' })
+    const { error } = db
+      ? await db.from('inquiries').insert({ ...enquiry, channel: viaWhatsApp ? 'whatsapp' : 'form' })
+      : { error: new Error('Supabase is not configured') }
     if (viaWhatsApp) {
       // Even if saving failed, the visitor already has the full message ready in WhatsApp.
       setWaUrl(whatsappUrl)

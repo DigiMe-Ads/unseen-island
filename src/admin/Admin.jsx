@@ -25,6 +25,22 @@ function useNoIndex() {
 
 export default function Admin() {
   useNoIndex()
+  if (!supabase) {
+    return (
+      <div className="grid min-h-screen place-items-center bg-sand px-4">
+        <div className="w-full max-w-md bg-white p-8 text-center shadow-sm">
+          <p className="font-serif text-2xl text-forest">Admin isn’t connected</p>
+          <p className="mt-2 text-sm text-muted">
+            This build has no Supabase settings. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to the hosting environment variables and redeploy.
+          </p>
+        </div>
+      </div>
+    )
+  }
+  return <AdminApp />
+}
+
+function AdminApp() {
   const [session, setSession] = useState(undefined)
   const [isAdmin, setIsAdmin] = useState(null)
 
