@@ -269,7 +269,7 @@ export const SECTIONS = [
     defaults: {
       title: 'The Stories',
       accent: 'Of The Unseen Island',
-      lede: 'Escape, explore and experience a side of Sri Lanka few travellers ever see.',
+      lede: 'Escape • Explore • Experience — a side of Sri Lanka few travellers ever see.',
       image: [I.goldenBeach],
     },
   },
@@ -318,8 +318,8 @@ export const SECTIONS = [
     fields: [statementLines],
     defaults: {
       lines: [
-        { roman: 'Escape,', italic: '' },
-        { roman: 'Explore,', italic: 'And' },
+        { roman: 'Escape •', italic: '' },
+        { roman: 'Explore •', italic: '' },
         { roman: '', italic: 'Experience' },
       ],
     },

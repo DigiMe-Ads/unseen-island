@@ -10,7 +10,7 @@ export default function Logo({ light = false, size = 'md', onClick }) {
         THE UNSEEN ISLAND
       </span>
       <span className={`mt-0.5 font-sans font-medium tracking-[0.3em] transition-colors duration-500 ${tag} ${light ? 'text-cream/80' : 'text-gold'}`}>
-        ESCAPE · EXPLORE · EXPERIENCE
+        ESCAPE • EXPLORE • EXPERIENCE
       </span>
     </Link>
   )
