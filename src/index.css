@@ -59,6 +59,22 @@ body { @apply bg-cream font-sans font-light text-ink antialiased; }
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+/* Trustindex reviews on the forest band: keep its text cream in both light and dark mode */
+#reviews .ti-widget .ti-review-item > .ti-inner { background: transparent !important; border-color: transparent !important; box-shadow: none !important; }
+#reviews .ti-widget .ti-name,
+#reviews .ti-widget .ti-review-content,
+#reviews .ti-widget .ti-review-content *,
+#reviews .ti-widget .ti-read-more,
+#reviews .ti-widget .ti-read-more *,
+#reviews .ti-widget .ti-rating-text,
+#reviews .ti-widget .ti-rating-text *,
+#reviews .ti-widget .ti-footer,
+#reviews .ti-widget .ti-footer * { color: var(--color-cream) !important; }
+#reviews .ti-widget .ti-date { color: rgb(248 248 243 / 0.55) !important; }
+#reviews .ti-widget .ti-controls .ti-next::before,
+#reviews .ti-widget .ti-controls .ti-prev::before { border-color: var(--color-cream) !important; }
+#reviews .ti-widget .ti-controls-line .dot { background: rgb(248 248 243 / 0.5) !important; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

@@ -2,7 +2,7 @@
 // fields that differ from it, so anything never edited keeps following the code.
 import { IMAGES as I } from '../data/images.js'
 import { NAV_LINKS, SERVICES, CONTACT, SOCIAL } from '../data/site.js'
-import { SIGNATURE, RETREATS, EXPERIENCES, JOURNAL, REVIEWS, REGIONS } from '../data/content.js'
+import { SIGNATURE, RETREATS, EXPERIENCES, JOURNAL, REGIONS } from '../data/content.js'
 import { GALLERY } from '../data/gallery.js'
 
 const text = (key, label, help) => ({ key, label, type: 'text', help })
@@ -95,7 +95,7 @@ export const SECTIONS = [
     fields: [text('title', 'First line'), text('accent', 'Second line (italic)'), images('slides', 'Slideshow photos')],
     defaults: {
       title: 'One Unseen Island',
-      accent: 'Countless Extraordinary Journeys',
+      accent: 'Extraordinary Journeys',
       slides: [I.villaCoast, I.sunsetPalms, I.surfers, I.rainforestPool],
     },
   },
@@ -106,8 +106,8 @@ export const SECTIONS = [
     fields: [...heading(), paragraphs('body', 'Text'), photos('image', 'Large photos'), photos('inset', 'Small overlapping photos'), text('link', 'Link text')],
     defaults: {
       label: 'Discover Sri Lanka',
-      title: 'Curating Meaningful Journeys',
-      accent: 'With The Unseen Island',
+      title: 'Meaningful Journeys',
+      accent: 'Thoughtfully Curated',
       body: [
         'Sri Lanka offers a wealth of lesser-known attractions for the curious traveller. Discover unspoiled beaches, dry zone forests teeming with wildlife, misty mountain forests hiding waterfalls, and charming tea planters’ bungalows nestled amidst lush greenery.',
         'Beyond its landscapes lies a cuisine shaped by many cultures and a history of ancient civilisations whose relics are rarely found on the tourist trail — an experience far beyond the ordinary.',
@@ -226,17 +226,11 @@ export const SECTIONS = [
     name: 'Guest reviews',
     fields: [
       text('label', 'Small label'),
-      text('rating', 'Rating text'),
-      list('items', 'Reviews', [text('name', 'Guest name'), area('text', 'Review')], { itemTitle: (it) => it.name }),
-      text('link', 'Link text'),
-      text('linkUrl', 'Link URL'),
+      text('widget', 'Trustindex widget ID', 'The code after "loader.js?" in the Trustindex embed snippet. Choose which reviews appear in the Trustindex dashboard.'),
     ],
     defaults: {
       label: 'What Our Guests Say',
-      rating: '35 Google reviews',
-      items: REVIEWS,
-      link: 'Read All Reviews',
-      linkUrl: 'https://www.google.com/maps/search/The+Unseen+Island',
+      widget: '197af1082186079615761c96cbc',
     },
   },
   {

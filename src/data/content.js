@@ -27,12 +27,6 @@ export const JOURNAL = [
   { date: 'The North', title: 'Jaffna, At The Top Of An Island', image: IMAGES.ruins, excerpt: 'Colonial ruins, sand dunes and the warmest hospitality at the northern tip of the island.' },
 ]
 
-export const REVIEWS = [
-  { name: 'Sam', text: "We've had many tours in our life and Graeme was the best by far. We couldn't recommend him highly enough." },
-  { name: 'K Sanders', text: 'We felt personally supported and also a sense of genuine interest and care from Graeme from our first email.' },
-  { name: 'Esta Spalding', text: 'The Unseen Island took care of us from beginning to end of our fantastic trip. They helped plan all of the details before we left.' },
-]
-
 export const REGIONS = [
   { name: 'The North', title: 'Jaffna & Beyond', image: IMAGES.ruins, text: "In the north, Jaffna's ancient temples, colonial ruins, and unspoiled beaches reflect vibrant traditions and warm hospitality. The island's rich history comes alive in ancient cities like Anuradhapura and the iconic Sigiriya rock fortress, a marvel of human ingenuity." },
   { name: 'The East', title: 'Surf & Wild Parks', image: IMAGES.surfers, text: "Journey east to Trincomalee, with its historical ties to British rule and World War II, and explore Arugam Bay's surfer's paradise or Kumana National Park's rich biodiversity." },
